@@ -1,0 +1,86 @@
+                    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E  Z O S K C T R         
+
+ 
+20.13.15 JOB06271 ---- WEDNESDAY, 27 AUG 2014 ----
+20.13.15 JOB06271  IRR010I  USERID KC03Q19  IS ASSIGNED TO THIS JOB.
+20.13.15 JOB06271  ICH70001I KC03Q19  LAST ACCESS AT 19:37:39 ON WEDNESDAY, AUGUST 27, 2014
+20.13.15 JOB06271  $HASP373 KC03Q19A STARTED - INIT 2    - CLASS A - SYS S0W1
+20.13.15 JOB06271  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+20.13.15 JOB06271  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+20.13.15 JOB06271  -JSTEP01              00      7      1       .00       .00     .0                BATCH        0     0     0     0
+20.13.15 JOB06271  -KC03Q19A ENDED.  NAME-AHMER WASEEM         TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+20.13.15 JOB06271  $HASP395 KC03Q19A ENDED
+
+------ JES2 JOB STATISTICS ------
+
+
+  27 AUG 2014 JOB EXECUTION DATE
+
+
+           36 CARDS READ
+
+
+           69 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+            5 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03Q19A JOB ,'AHMER WASEEM',MSGCLASS=H                               JOB06271
+         //*                                                                     00020000
+         //***********************************************************           00030000
+         //*                                                         *           00040000
+         //*  CSCI 465/565 - Fall 2014                               *           00050000
+         //*                                                         *           00060000
+         //*  ASSIGNMENT 0                                           *           00070000
+         //*                                                         *           00080000
+         //*  PROGRAMMER: Ahmer Waseem                               *           00090000
+         //*                                                         *           00100000
+         //*  DUE DATE: 08/28/14                                     *           00110000
+         //*  DUE TIME: 11:59 PM or 23:59                            *           00120000
+         //*                                                         *           00130000
+         //*  The purpose of this job is to run IEFBR14 to create a  *           00140000
+         //*  PDS.  IEFBR14 is one of the most commonly used of all  *           00150000
+         //*  IBM utilities.  This load module's source consists     *           00160000
+         //*  only of a single BR 14 instruction and really          *           00170000
+         //*  accomplishes nothing as a stand-alone program BUT, as  *           00180000
+         //*  we will soon find out, it has MANY uses for            *           00190000
+         //*  allocating, cataloging, deleting, and un-cataloging    *           00200000
+         //*  data sets.  In this single job step you are simply     *           00210000
+         //*  executing IEFBR14 and it will allocate the second of   *           00220000
+         //*  the two partitioned data sets (PDSs) that you will     *           00230000
+         //*  need this semester.                                    *           00240000
+         //*                                                         *           00250000
+         //***********************************************************           00260000
+         //*                                                                     00270000
+       2 //JSTEP01  EXEC PGM=IEFBR14                                             00280000
+         //*                                                                     00290000
+         //*  The following DD card allocates a PDS to hold your                 00300000
+         //*  program (source code) files.                                       00310000
+         //*                                                                     00320000
+       3 //DD1      DD DSN=KC03Q19.CSCI465.SOURCE,                               00330002
+         //            DCB=(LRECL=80,BLKSIZE=880,RECFM=FB,DSORG=PO),             00340000
+         //            SPACE=(CYL,(5,10,20)),                                    00350000
+         //            DISP=(NEW,KEEP,DELETE)                                    00360000
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03Q19  LAST ACCESS AT 19:37:39 ON WEDNESDAY, AUGUST 27, 2014
+IEF236I ALLOC. FOR KC03Q19A JSTEP01
+IGD101I SMS ALLOCATED TO DDNAME (DD1     )
+        DSN (KC03Q19.CSCI465.SOURCE                      )
+        STORCLAS (PRIM90) MGMTCLAS (DEFAULT) DATACLAS (        )
+        VOL SER NOS= KCTR41                                                                
+IEF142I KC03Q19A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC03Q19.CSCI465.SOURCE                       RETAINED,  DDNAME=DD1     
+IEF373I STEP/JSTEP01 /START 2014239.2013
+IEF032I STEP/JSTEP01 /STOP  2014239.2013 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   252K  EXT:        0K  SYS:    10276K
+IEF375I  JOB/KC03Q19A/START 2014239.2013
+IEF033I  JOB/KC03Q19A/STOP  2014239.2013 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!

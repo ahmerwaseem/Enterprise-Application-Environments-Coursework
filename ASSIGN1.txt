@@ -1,0 +1,142 @@
+                    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E  Z O S K C T R         
+
+ 
+14.55.48 JOB09906 ---- FRIDAY,    12 SEP 2014 ----
+14.55.48 JOB09906  IRR010I  USERID KC03Q19  IS ASSIGNED TO THIS JOB.
+14.55.48 JOB09906  ICH70001I KC03Q19  LAST ACCESS AT 14:52:29 ON FRIDAY, SEPTEMBER 12, 2014
+14.55.48 JOB09906  $HASP373 KC03Q19A STARTED - INIT 2    - CLASS A - SYS S0W1
+14.55.48 JOB09906  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+14.55.48 JOB09906  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+14.55.48 JOB09906  -JSTEP01              00     14      4       .00       .00     .0                BATCH        0     0     0     0
+14.55.48 JOB09906  -JSTEP02              00      6      1       .00       .00     .0                BATCH        0     0     0     0
+14.55.48 JOB09906  -JSTEP03              00      9      2       .00       .00     .0                BATCH        0     0     0     0
+14.55.48 JOB09906  -KC03Q19A ENDED.  NAME-AHMER WASEEM         TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+14.55.48 JOB09906  $HASP395 KC03Q19A ENDED
+
+------ JES2 JOB STATISTICS ------
+
+
+  12 SEP 2014 JOB EXECUTION DATE
+
+
+           69 CARDS READ
+
+
+          125 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           10 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03Q19A JOB ,'AHMER WASEEM',MSGCLASS=H                               JOB09906
+         //*                                                                     00002001
+         //**********************************************************************00010001
+         //*                                                                    *00010102
+         //* CSCI 465 - FALL 2014                                               *00011001
+         //* ASSIGNMENT 1                                                       *00012001
+         //* PROGRAMMER: AHMER WASEEM                                           *00013001
+         //* DUE DAY: 9/12/14                                                   *00014001
+         //* DUE TIME: 11:59PM                                                  *00014101
+         //* THE PURPOSE OF THE PROGRAM IS TO FIND SPECIFIC DATA SETS,          *00014201
+         //* IF FOUND, THEY ARE DELETED, IF THEY ARE NOT FOUND THEY ARE         *00014301
+         //* CREATED IN THE SUBSEQUENT JOB STEPS.                               *00014402
+         //*                                                                    *00014502
+         //**********************************************************************00015001
+         //*                                                                     00016001
+       2 //JSTEP01 EXEC PGM=IEFBR14                                              00020001
+         //*                                                                     00021001
+         //**********************************************************************00021101
+         //*                                                                    *00021202
+         //* --JSTEP01--                                                        *00021301
+         //* DD1 SEARCHES FOR A FLAT FILE, IF FOUND, IT IS DELETED, IF NOT      *00022001
+         //* FOUND, IT IS ALLOCATED, BUT IMMEDIATELY DELETED.                   *00023001
+         //* DD2 SEARCHES FOR A PDS, IF FOUND, IT IS DELETED, IF NOT            *00023102
+         //* FOUND, IT IS ALLOCATED, BUT IMMEDIATELY DELETED.                   *00023202
+         //*                                                                    *00024002
+         //**********************************************************************00030001
+         //*                                                                     00031001
+       3 //DD1     DD   DSN=KC03Q19.CSCI465.TESTSEQ,                             00040001
+         //             DISP=(MOD,DELETE,DELETE),                                00050001
+         //             SPACE=(1,(1,1))                                          00060001
+         //*                                                                     00061001
+       4 //DD2     DD   DSN=KC03Q19.CSCI465.TESTPDS,                             00080001
+         //             DISP=(MOD,DELETE,DELETE),                                00090001
+         //             SPACE=(1,(1,1,1))                                        00100001
+         //*                                                                     00110001
+       5 //JSTEP02 EXEC PGM=IEFBR14,COND=(4,LT)                                  00120001
+         //*                                                                     00121001
+         //**********************************************************************00130001
+         //*                                                                    *00130102
+         //* --JSTEP02--                                                        *00130201
+         //* DD3 ALLOCATES A FLAT FILE WITH 35-BYTE FIXED-LENGTH RECORDS,       *00131001
+         //* A BLOCKING FACTOR OF 8, WITH 4 TRACKS PRIMARY AND 2 TRACKS         *00132001
+         //* SECONDARY. FILE IS DELETED IF STEP FAILS. STEP RUNS WITH CONDITION *00133001
+         //* CODE OF 4 OR LESS.                                                 *00134001
+         //*                                                                    *00134102
+         //**********************************************************************00135001
+         //*                                                                     00136001
+       6 //DD3     DD   DSN=KC03Q19.CSCI465.TESTSEQ,                             00140001
+         //             DCB=(LRECL=35,BLKSIZE=280,RECFM=FB),                     00152001
+         //             SPACE=(TRK,(4,2)),                                       00160001
+         //             DISP=(NEW,KEEP,DELETE)                                   00161001
+         //*                                                                     00170001
+       7 //JSTEP03 EXEC PGM=IEFBR14,COND=(0,NE)                                  00180001
+         //*                                                                     00190001
+         //**********************************************************************00190101
+         //*                                                                    *00190202
+         //* --JSTEP03--                                                        *00190301
+         //* DD4 ALLOCATES A PDS WITH 15-BYTE FIXED-LENGTH RECORS, WITH A       *00191001
+         //* A BLOCKING FACTOR OF 4, WITH 1 TRACKS PRIMARY, 2 TRACKS SECONDARY, *00192001
+         //* AND 3 DIRECTORY BLOCKS. PDS IS DELETED IF STEP FAILS. STEP RUNS    *00193001
+         //* WITH CONDITION CODE OF 0 ONLY.                                     *00194001
+         //*                                                                    *00194102
+         //**********************************************************************00195001
+         //*                                                                     00196001
+       8 //DD4     DD   DSN=KC03Q19.CSCI465.TESTPDS,                             00200001
+         //             DCB=(LRECL=15,BLKSIZE=60,RECFM=FB),                      00220001
+         //             SPACE=(CYL,(1,2,3)),                                     00230001
+         //             DISP=(NEW,KEEP,DELETE)                                   00240001
+         //*                                                                     00250002
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03Q19  LAST ACCESS AT 14:52:29 ON FRIDAY, SEPTEMBER 12, 2014
+IEF236I ALLOC. FOR KC03Q19A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME DD1
+IGD103I SMS ALLOCATED TO DDNAME DD2
+IEF142I KC03Q19A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD105I KC03Q19.CSCI465.TESTSEQ                      DELETED,   DDNAME=DD1     
+IGD105I KC03Q19.CSCI465.TESTPDS                      DELETED,   DDNAME=DD2     
+IEF373I STEP/JSTEP01 /START 2014255.1455
+IEF032I STEP/JSTEP01 /STOP  2014255.1455 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   256K  EXT:        4K  SYS:    12852K
+IEF236I ALLOC. FOR KC03Q19A JSTEP02
+IGD101I SMS ALLOCATED TO DDNAME (DD3     )
+        DSN (KC03Q19.CSCI465.TESTSEQ                     )
+        STORCLAS (PRIM90) MGMTCLAS (DEFAULT) DATACLAS (        )
+        VOL SER NOS= KCTR16                                                                
+IEF142I KC03Q19A JSTEP02 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC03Q19.CSCI465.TESTSEQ                      RETAINED,  DDNAME=DD3     
+IEF373I STEP/JSTEP02 /START 2014255.1455
+IEF032I STEP/JSTEP02 /STOP  2014255.1455 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   256K  EXT:        4K  SYS:    12848K
+IEF236I ALLOC. FOR KC03Q19A JSTEP03
+IGD101I SMS ALLOCATED TO DDNAME (DD4     )
+        DSN (KC03Q19.CSCI465.TESTPDS                     )
+        STORCLAS (PRIM90) MGMTCLAS (DEFAULT) DATACLAS (        )
+        VOL SER NOS= KCTR09                                                                
+IEF142I KC03Q19A JSTEP03 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC03Q19.CSCI465.TESTPDS                      RETAINED,  DDNAME=DD4     
+IEF373I STEP/JSTEP03 /START 2014255.1455
+IEF032I STEP/JSTEP03 /STOP  2014255.1455 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:     4K  SYS:   256K  EXT:        4K  SYS:    12848K
+IEF375I  JOB/KC03Q19A/START 2014255.1455
+IEF033I  JOB/KC03Q19A/STOP  2014255.1455 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
